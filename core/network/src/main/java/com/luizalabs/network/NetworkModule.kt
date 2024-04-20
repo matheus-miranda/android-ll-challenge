@@ -19,8 +19,14 @@ internal object NetworkModule {
     private const val BASE_URL = "https://servicodados.ibge.gov.br/api/v1/"
 
     @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideLoggingInterceptor(@BuildType buildType: String): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            setLevel(
+                if (buildType == "DEBUG") {
+                    HttpLoggingInterceptor.Level.BODY
+                } else HttpLoggingInterceptor.Level.NONE
+            )
+        }
     }
 
     @Provides
