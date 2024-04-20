@@ -70,6 +70,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
 
     implementation(project(":feature:registration"))
+    implementation(project(":core:network"))
 }
 
 kapt {

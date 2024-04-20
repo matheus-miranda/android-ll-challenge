@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Delivery App"
 include(":app")
 include(":feature:registration")
+include(":core:network")
