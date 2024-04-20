@@ -38,7 +38,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
 
     api(libs.retrofit)
-    implementation(libs.converter.moshi)
+    api(libs.converter.moshi)
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
     implementation(libs.okhttp.interceptor)
