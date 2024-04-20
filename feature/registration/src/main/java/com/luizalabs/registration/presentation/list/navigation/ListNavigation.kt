@@ -1,8 +1,8 @@
-package com.luizalabs.registration.list.navigation
+package com.luizalabs.registration.presentation.list.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.luizalabs.registration.list.ListScreen
+import com.luizalabs.registration.presentation.list.ListScreen
 
 const val LIST_ROUTE = "list"
 

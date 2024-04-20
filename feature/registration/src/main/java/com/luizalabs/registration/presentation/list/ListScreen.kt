@@ -1,4 +1,4 @@
-package com.luizalabs.registration.list
+package com.luizalabs.registration.presentation.list
 
 import androidx.compose.runtime.Composable
 
