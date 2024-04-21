@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">Carregando</string>
+    <string name="delivery_list">Lista de Entregas</string>
+    <string name="back">Voltar</string>
+    <string name="add_new_form">Novo registro</string>
+    <string name="click_the_icon_below">Clique no ícone \"+\" abaixo para adicionar um novo registro</string>
+    <string name="error_fetching_from_the_database">Erro ao buscar dados no banco</string>
+    <string name="delivery_deadline">Data limite: %1$s</string>
+    <string name="customer">Cliente: %1$s</string>
+    <string name="street">Rua: %1$s</string>
+    <string name="number">Número: %1$s</string>
+    <string name="neighborhood">Bairro: %1$s</string>
+</resources>

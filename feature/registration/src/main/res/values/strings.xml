@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">Loading</string>
+    <string name="delivery_list">Delivery List</string>
+    <string name="back">Back</string>
+    <string name="add_new_form">New form</string>
+    <string name="click_the_icon_below">Click the \"+\" icon below to add a new delivery</string>
+    <string name="error_fetching_from_the_database">Error fetching from the database</string>
+    <string name="delivery_deadline">Delivery deadline: %1$s</string>
+    <string name="customer">Customer: %1$s</string>
+    <string name="street">Street: %1$s</string>
+    <string name="number">Number: %1$s</string>
+    <string name="neighborhood">District: %1$s</string>
+</resources>

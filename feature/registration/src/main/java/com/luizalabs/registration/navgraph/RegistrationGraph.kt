@@ -13,6 +13,13 @@ fun NavGraphBuilder.featureRegistrationGraph(navController: NavHostController) {
         route = REGISTRATION_GRAPH_ROUTE,
         startDestination = LIST_ROUTE
     ) {
-        listScreen()
+        listScreen(
+            onAddNewDeliveryClick = {
+                // TODO("navController::navigateToDetailScreen")
+            },
+            onViewCardDetailsClick = {
+                // TODO("navController::navigateToDetailScreenWithId")
+            }
+        )
     }
 }
