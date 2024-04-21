@@ -77,6 +77,7 @@ dependencies {
 
     implementation(project(":feature:registration"))
     implementation(project(":core:network"))
+    implementation(project(":core:database"))
 }
 
 kapt {

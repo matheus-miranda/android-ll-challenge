@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.luizalabs.registration"
+    namespace = "com.luizalabs.database"
     compileSdk = 34
 
     defaultConfig {
@@ -25,12 +25,6 @@ android {
             )
         }
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,24 +36,14 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(project(":core:network"))
-    implementation(project(":core:database"))
-}
-
-kapt {
-    correctErrorTypes = true
+    testImplementation(libs.room.testing)
 }
