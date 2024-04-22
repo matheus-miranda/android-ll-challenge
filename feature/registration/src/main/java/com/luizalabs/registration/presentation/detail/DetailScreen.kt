@@ -41,14 +41,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.luizalabs.designsystem.AppDatePickerDialog
+import com.luizalabs.designsystem.AppDropdownMenu
+import com.luizalabs.designsystem.AppTextField
+import com.luizalabs.designsystem.AppTopBar
+import com.luizalabs.designsystem.LoadingIndicator
 import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.City
 import com.luizalabs.registration.presentation.common.toDateString
-import com.luizalabs.registration.presentation.components.AppDatePickerDialog
-import com.luizalabs.registration.presentation.components.AppDropdownMenu
-import com.luizalabs.registration.presentation.components.AppTextField
-import com.luizalabs.registration.presentation.components.AppTopBar
-import com.luizalabs.registration.presentation.components.LoadingIndicator
 import com.luizalabs.registration.presentation.detail.helper.stateList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -122,7 +122,6 @@ private fun ShowSnackBarErrorMessages(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainContent(
     innerPadding: PaddingValues,

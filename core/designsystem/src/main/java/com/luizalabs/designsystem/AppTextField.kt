@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.components
+package com.luizalabs.designsystem
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

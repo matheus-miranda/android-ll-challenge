@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.components
+package com.luizalabs.designsystem
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
-import com.luizalabs.registration.R
 
 @Composable
 fun LoadingIndicator(modifier: Modifier = Modifier) {

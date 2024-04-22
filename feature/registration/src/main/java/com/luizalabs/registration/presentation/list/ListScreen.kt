@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.luizalabs.designsystem.AppTopBar
+import com.luizalabs.designsystem.LoadingIndicator
 import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.DeliveryAddress
 import com.luizalabs.registration.domain.model.DeliveryForm
-import com.luizalabs.registration.presentation.components.AppTopBar
-import com.luizalabs.registration.presentation.components.LoadingIndicator
 import com.luizalabs.registration.presentation.list.components.CenterScreenText
 import com.luizalabs.registration.presentation.list.components.DeliveryList
 import com.luizalabs.registration.presentation.list.components.FabButton

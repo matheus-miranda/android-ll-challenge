@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.components
+package com.luizalabs.designsystem
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.luizalabs.registration.R
 import java.util.concurrent.TimeUnit
 
 @OptIn(ExperimentalMaterial3Api::class)

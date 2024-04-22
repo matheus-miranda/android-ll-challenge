@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.components
+package com.luizalabs.designsystem
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 fun AppDropdownMenu(
     value: String,
     label: String,
+    modifier: Modifier = Modifier,
     itemList: List<String>,
     enabled: Boolean = true,
     onSelectedItem: (String) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     var expandedMenuState by remember { mutableStateOf(false) }
     var selectedOptionTextState by remember { mutableStateOf(String()) }

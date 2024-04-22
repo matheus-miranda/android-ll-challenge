@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.components
+package com.luizalabs.designsystem
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.luizalabs.registration.R
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
