@@ -2,7 +2,9 @@ package com.luizalabs.registration.navgraph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.navigation
+import androidx.navigation.compose.navigation
+import com.luizalabs.registration.presentation.detail.navigation.detailScreen
+import com.luizalabs.registration.presentation.detail.navigation.navigateToDetailScreen
 import com.luizalabs.registration.presentation.list.navigation.LIST_ROUTE
 import com.luizalabs.registration.presentation.list.navigation.listScreen
 
@@ -14,12 +16,11 @@ fun NavGraphBuilder.featureRegistrationGraph(navController: NavHostController) {
         startDestination = LIST_ROUTE
     ) {
         listScreen(
-            onAddNewDeliveryClick = {
-                // TODO("navController::navigateToDetailScreen")
-            },
-            onViewCardDetailsClick = {
-                // TODO("navController::navigateToDetailScreenWithId")
-            }
+            onAddNewDeliveryClick = navController::navigateToDetailScreen,
+            onViewCardDetailsClick = navController::navigateToDetailScreen,
+        )
+        detailScreen(
+            onNavigateUp = navController::navigateUp
         )
     }
 }

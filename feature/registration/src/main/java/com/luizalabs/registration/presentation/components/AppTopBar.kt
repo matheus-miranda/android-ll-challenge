@@ -2,6 +2,7 @@ package com.luizalabs.registration.presentation.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,6 +23,8 @@ fun AppTopBar(
     shouldNavigateUp: Boolean = false,
     onNavigateUp: (() -> Unit)? = null,
     scrollBehavior: TopAppBarScrollBehavior,
+    shouldShowDelete: Boolean = false,
+    onDeleteClick: (() -> Unit)? = null,
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = title, overflow = TextOverflow.Ellipsis, maxLines = 1) },
@@ -32,6 +35,16 @@ fun AppTopBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.back)
+                    )
+                }
+            }
+        },
+        actions = {
+            if (shouldShowDelete) {
+                IconButton(onClick = { onDeleteClick?.invoke() }) {
+                    Icon(
+                        imageVector = Icons.Filled.Delete,
+                        contentDescription = stringResource(R.string.delete)
                     )
                 }
             }
@@ -46,6 +59,7 @@ private fun AppTopBarPreview() {
     AppTopBar(
         title = "App Bar Title",
         shouldNavigateUp = true,
+        shouldShowDelete = true,
         scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     )
 }

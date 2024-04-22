@@ -11,4 +11,18 @@
     <string name="street">Rua: %1$s</string>
     <string name="number">Número: %1$s</string>
     <string name="neighborhood">Bairro: %1$s</string>
+    <string name="new_delivery">Nova Entrega</string>
+    <string name="edit_delivery">Editar Entrega</string>
+    <string name="delete">Apagar</string>
+    <string name="save">Salvar</string>
+    <string name="pick_deadline_delivery_date">Escolha a data limite de entrega</string>
+    <string name="delivery_date">Data limite:</string>
+    <string name="no_internet">Verifique sua conexão</string>
+    <string name="connection_error">Erro de conexão, tente mais tarde</string>
+    <string name="request_timeout">Timeout, tente mais tarde</string>
+    <string name="payload_too_large">Payload não suportado</string>
+    <string name="parse_error">Erro de parse</string>
+    <string name="error_try_again_later">Erro, tente mais tarde</string>
+    <string name="fill_all_fields">Por favor preencha todos os campos</string>
+    <string name="save_failed">Falha ao salvar, tente novamente</string>
 </resources>

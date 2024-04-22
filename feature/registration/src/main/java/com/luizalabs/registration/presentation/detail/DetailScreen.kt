@@ -1,0 +1,354 @@
+package com.luizalabs.registration.presentation.detail
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.House
+import androidx.compose.material.icons.filled.Numbers
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Warehouse
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
+import com.luizalabs.registration.R
+import com.luizalabs.registration.domain.model.City
+import com.luizalabs.registration.presentation.common.toDateString
+import com.luizalabs.registration.presentation.components.AppTopBar
+import com.luizalabs.registration.presentation.components.LoadingIndicator
+import com.luizalabs.registration.presentation.detail.components.AppDatePickerDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun DetailScreen(
+    onNavigateUp: () -> Unit,
+    uiState: DetailUiState,
+    cityList: List<City>,
+    onEvent: (DetailUiEvent) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    val snackBarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    Scaffold(
+        modifier = modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        snackbarHost = { SnackbarHost(snackBarHostState) },
+        topBar = {
+            AppTopBar(
+                title = if (uiState.isNewForm) {
+                    stringResource(R.string.new_delivery)
+                } else stringResource(
+                    R.string.edit_delivery
+                ),
+                shouldNavigateUp = true,
+                onNavigateUp = { onNavigateUp.invoke() },
+                shouldShowDelete = uiState.isNewForm.not(),
+                onDeleteClick = {
+                    onEvent(DetailUiEvent.DeleteForm)
+                    onNavigateUp.invoke()
+                },
+                scrollBehavior = scrollBehavior
+            )
+        },
+        content = { innerPadding ->
+            ShowSnackBarErrorMessages(uiState, coroutineScope, snackBarHostState, onEvent)
+
+            MainContent(
+                innerPadding,
+                uiState,
+                onEvent,
+                cityList,
+                onNavigateUp,
+            )
+        },
+    )
+}
+
+@Composable
+private fun ShowSnackBarErrorMessages(
+    uiState: DetailUiState,
+    coroutineScope: CoroutineScope,
+    snackBarHostState: SnackbarHostState,
+    onEvent: (DetailUiEvent) -> Unit,
+) {
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = uiState.uiError) {
+        coroutineScope.launch {
+            uiState.uiError?.let {
+                snackBarHostState.showSnackbar(message = it.asString(context))
+            }
+            onEvent.invoke(DetailUiEvent.SnackBarShown)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MainContent(
+    innerPadding: PaddingValues,
+    uiState: DetailUiState,
+    onEvent: (DetailUiEvent) -> Unit,
+    cityList: List<City>,
+    onNavigateUp: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        if (uiState.isLoading) {
+            LoadingIndicator()
+        }
+
+        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            AppTextField(
+                value = uiState.clientName,
+                onValueChange = { onEvent.invoke(DetailUiEvent.ClientNameEdit(it)) },
+                leadingIcon = Icons.Filled.Person,
+                label = "Name"
+            )
+            AppTextField(
+                value = uiState.clientCpf,
+                onValueChange = { onEvent.invoke(DetailUiEvent.ClientCpfEdit(it)) },
+                leadingIcon = Icons.Filled.Person,
+                label = "ID"
+            )
+            AppTextField(
+                value = if (uiState.parcelQuantity == 0) "" else uiState.parcelQuantity.toString(),
+                onValueChange = { number ->
+                    try {
+                        number.toInt()
+                        onEvent.invoke(DetailUiEvent.ParcelQuantityEdit(number.toInt()))
+                    } catch (_: Exception) {
+                        onEvent.invoke(DetailUiEvent.ParcelQuantityEdit(0))
+                    }
+                },
+                label = "Number of Parcels",
+                leadingIcon = Icons.Filled.Numbers,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                var showDatePicker by rememberSaveable {
+                    mutableStateOf(false)
+                }
+                Text(text = stringResource(R.string.delivery_date))
+                OutlinedButton(onClick = { showDatePicker = true }) {
+                    Text(
+                        text = uiState.deliveryDeadline.toDateString()
+                    )
+                }
+                if (showDatePicker) {
+                    AppDatePickerDialog(
+                        onDateSelected = {
+                            onEvent.invoke(DetailUiEvent.DeliveryDeadlineEdit(it))
+                        }, onDismiss = {
+                            showDatePicker = false
+                        })
+                }
+            }
+
+            AppTextField(
+                value = uiState.street,
+                onValueChange = { onEvent.invoke(DetailUiEvent.StreetEdit(it)) },
+                leadingIcon = Icons.Filled.House,
+                label = "Street"
+            )
+            AppTextField(
+                value = uiState.number,
+                onValueChange = { onEvent.invoke(DetailUiEvent.NumberEdit(it)) },
+                leadingIcon = Icons.Filled.House,
+                label = "Number"
+            )
+            AppTextField(
+                value = uiState.neighborhood,
+                onValueChange = { onEvent.invoke(DetailUiEvent.NeighborhoodEdit(it)) },
+                leadingIcon = Icons.Filled.House,
+                label = "District"
+            )
+            AppTextField(
+                value = uiState.zipCode,
+                onValueChange = { onEvent.invoke(DetailUiEvent.ZipcodeEdit(it)) },
+                leadingIcon = Icons.Filled.House,
+                label = "Zipcode"
+            )
+            AppTextField(
+                value = uiState.complement.orEmpty(),
+                onValueChange = { onEvent.invoke(DetailUiEvent.ComplementEdit(it)) },
+                leadingIcon = Icons.Filled.Warehouse,
+                label = "Complement"
+            )
+
+            var expandedMenuState by remember { mutableStateOf(false) }
+            var selectedOptionTextState by remember { mutableStateOf(String()) }
+            ExposedDropdownMenuBox(
+                expanded = expandedMenuState,
+                onExpandedChange = { expandedMenuState = it },
+            ) {
+                TextField(
+                    value = uiState.state,
+                    label = { Text("State") },
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuState) },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                )
+
+                DropdownMenu(
+                    expanded = expandedMenuState,
+                    onDismissRequest = { expandedMenuState = false },
+                    modifier = Modifier.exposedDropdownSize()
+                ) {
+                    stateList.forEach { selectedOption ->
+                        DropdownMenuItem(
+                            text = { Text(text = selectedOption) },
+                            onClick = {
+                                selectedOptionTextState = selectedOption
+                                expandedMenuState = false
+                                onEvent.invoke(DetailUiEvent.StateEdit(selectedOption))
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                        )
+                    }
+                }
+            }
+
+            var expandedMenuCity by remember { mutableStateOf(false) }
+            var selectedOptionTextCity by remember { mutableStateOf(String()) }
+            ExposedDropdownMenuBox(
+                expanded = expandedMenuCity,
+                onExpandedChange = { expandedMenuCity = it },
+            ) {
+                TextField(
+                    enabled = uiState.cityListRetrieved,
+                    value = uiState.city,
+                    label = { Text("City") },
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuCity) },
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                )
+
+                DropdownMenu(
+                    expanded = expandedMenuCity,
+                    onDismissRequest = { expandedMenuCity = false },
+                    modifier = Modifier.exposedDropdownSize()
+                ) {
+                    cityList.forEach { selectedOption ->
+                        DropdownMenuItem(
+                            text = { Text(text = selectedOption.name) },
+                            onClick = {
+                                selectedOptionTextCity = selectedOption.name
+                                expandedMenuCity = false
+                                onEvent.invoke(DetailUiEvent.CityEdit(selectedOption.name))
+                            },
+                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, bottom = 8.dp),
+            onClick = { onEvent.invoke(DetailUiEvent.SubmitForm) }
+        ) {
+            Text(text = stringResource(R.string.save))
+        }
+        LaunchedEffect(key1 = uiState.formSaved) {
+            if (uiState.formSaved) onNavigateUp.invoke()
+        }
+    }
+}
+
+@Composable
+fun AppTextField(
+    value: String,
+    label: String,
+    modifier: Modifier = Modifier,
+    maxLines: Int = 1,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    onValueChange: (String) -> Unit,
+    readOnly: Boolean = false,
+    leadingIcon: ImageVector? = null,
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        maxLines = maxLines,
+        label = { Text(text = label) },
+        leadingIcon = {
+            leadingIcon?.let {
+                Icon(imageVector = it, contentDescription = null)
+            }
+        },
+        keyboardOptions = keyboardOptions,
+        readOnly = readOnly,
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth()
+            .then(modifier)
+    )
+
+}

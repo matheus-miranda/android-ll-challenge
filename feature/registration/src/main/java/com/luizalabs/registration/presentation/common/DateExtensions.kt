@@ -1,13 +1,15 @@
 package com.luizalabs.registration.presentation.common
 
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.Calendar
 import java.util.Locale
 
 fun Long.toDateString(): String {
-    val date = Date(this)
+    val calendar = Calendar.getInstance().apply {
+        timeInMillis = this@toDateString
+    }
     val format = SimpleDateFormat("yyyy/MMM/dd", Locale.getDefault())
-    return format.format(date)
+    return format.format(calendar.time)
 }
 
 fun String.dateToLong(): Long {

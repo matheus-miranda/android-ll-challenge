@@ -8,11 +8,11 @@ import androidx.navigation.compose.composable
 import com.luizalabs.registration.presentation.list.ListScreen
 import com.luizalabs.registration.presentation.list.ListViewModel
 
-const val LIST_ROUTE = "list"
+internal const val LIST_ROUTE = "list"
 
 internal fun NavGraphBuilder.listScreen(
     onAddNewDeliveryClick: () -> Unit,
-    onViewCardDetailsClick: (Int) -> Unit
+    onViewCardDetailsClick: (Int) -> Unit,
 ) {
     composable(LIST_ROUTE) {
         val viewModel: ListViewModel = hiltViewModel()
