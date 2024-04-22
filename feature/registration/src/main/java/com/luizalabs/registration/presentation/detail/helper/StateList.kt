@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.detail
+package com.luizalabs.registration.presentation.detail.helper
 
 val stateList = listOf(
     "AC",

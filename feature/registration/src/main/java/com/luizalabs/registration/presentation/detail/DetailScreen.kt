@@ -17,19 +17,12 @@ import androidx.compose.material.icons.filled.Numbers
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Warehouse
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -42,18 +35,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.City
 import com.luizalabs.registration.presentation.common.toDateString
+import com.luizalabs.registration.presentation.components.AppDatePickerDialog
+import com.luizalabs.registration.presentation.components.AppDropdownMenu
+import com.luizalabs.registration.presentation.components.AppTextField
 import com.luizalabs.registration.presentation.components.AppTopBar
 import com.luizalabs.registration.presentation.components.LoadingIndicator
-import com.luizalabs.registration.presentation.detail.components.AppDatePickerDialog
+import com.luizalabs.registration.presentation.detail.helper.stateList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -231,80 +227,18 @@ private fun MainContent(
                 label = stringResource(R.string.complement)
             )
 
-            var expandedMenuState by remember { mutableStateOf(false) }
-            var selectedOptionTextState by remember { mutableStateOf(String()) }
-            ExposedDropdownMenuBox(
-                expanded = expandedMenuState,
-                onExpandedChange = { expandedMenuState = it },
-            ) {
-                TextField(
-                    value = uiState.state,
-                    label = { Text(stringResource(R.string.state)) },
-                    onValueChange = {},
-                    readOnly = true,
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuState) },
-                    modifier = Modifier
-                        .menuAnchor()
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
+            AppDropdownMenu(
+                value = uiState.state,
+                label = stringResource(R.string.state),
+                itemList = stateList,
+                onSelectedItem = { onEvent.invoke(DetailUiEvent.StateEdit(it)) })
 
-                DropdownMenu(
-                    expanded = expandedMenuState,
-                    onDismissRequest = { expandedMenuState = false },
-                    modifier = Modifier.exposedDropdownSize()
-                ) {
-                    stateList.forEach { selectedOption ->
-                        DropdownMenuItem(
-                            text = { Text(text = selectedOption) },
-                            onClick = {
-                                selectedOptionTextState = selectedOption
-                                expandedMenuState = false
-                                onEvent.invoke(DetailUiEvent.StateEdit(selectedOption))
-                            },
-                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
-                        )
-                    }
-                }
-            }
-
-            var expandedMenuCity by remember { mutableStateOf(false) }
-            var selectedOptionTextCity by remember { mutableStateOf(String()) }
-            ExposedDropdownMenuBox(
-                expanded = expandedMenuCity,
-                onExpandedChange = { expandedMenuCity = it },
-            ) {
-                TextField(
-                    enabled = uiState.cityListRetrieved,
-                    value = uiState.city,
-                    label = { Text(stringResource(R.string.city)) },
-                    onValueChange = {},
-                    readOnly = true,
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuCity) },
-                    modifier = Modifier
-                        .menuAnchor()
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
-
-                DropdownMenu(
-                    expanded = expandedMenuCity,
-                    onDismissRequest = { expandedMenuCity = false },
-                    modifier = Modifier.exposedDropdownSize()
-                ) {
-                    cityList.forEach { selectedOption ->
-                        DropdownMenuItem(
-                            text = { Text(text = selectedOption.name) },
-                            onClick = {
-                                selectedOptionTextCity = selectedOption.name
-                                expandedMenuCity = false
-                                onEvent.invoke(DetailUiEvent.CityEdit(selectedOption.name))
-                            },
-                            contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
-                        )
-                    }
-                }
-            }
+            AppDropdownMenu(
+                value = uiState.city,
+                enabled = uiState.cityListRetrieved,
+                itemList = cityList.map { it.name },
+                label = stringResource(R.string.city),
+                onSelectedItem = { onEvent.invoke(DetailUiEvent.CityEdit(it)) })
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -322,33 +256,8 @@ private fun MainContent(
     }
 }
 
+@Preview
 @Composable
-fun AppTextField(
-    value: String,
-    label: String,
-    modifier: Modifier = Modifier,
-    maxLines: Int = 1,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    onValueChange: (String) -> Unit,
-    readOnly: Boolean = false,
-    leadingIcon: ImageVector? = null,
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        maxLines = maxLines,
-        label = { Text(text = label) },
-        leadingIcon = {
-            leadingIcon?.let {
-                Icon(imageVector = it, contentDescription = null)
-            }
-        },
-        keyboardOptions = keyboardOptions,
-        readOnly = readOnly,
-        modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
-            .then(modifier)
-    )
-
+private fun DetailScreenPreview() {
+    DetailScreen(onNavigateUp = {}, uiState = DetailUiState(), cityList = listOf(), onEvent = {})
 }

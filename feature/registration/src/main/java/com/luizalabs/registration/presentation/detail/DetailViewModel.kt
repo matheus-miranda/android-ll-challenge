@@ -74,7 +74,6 @@ internal class DetailViewModel @Inject constructor(
                 _uiState.update { it.copy(state = uiEvent.state) }
                 onStateSelected(_uiState.value.state)
             }
-
             is DetailUiEvent.CityEdit -> _uiState.update { it.copy(city = uiEvent.city) }
             is DetailUiEvent.NeighborhoodEdit -> _uiState.update { it.copy(neighborhood = uiEvent.neighborhood) }
             is DetailUiEvent.StreetEdit -> _uiState.update { it.copy(street = uiEvent.street) }
@@ -91,7 +90,7 @@ internal class DetailViewModel @Inject constructor(
             when (val cityResponse = cityRepository.getCitiesByState(state)) {
                 is Either.Success -> {
                     _cityList.value = cityResponse.data
-                    _uiState.update { it.copy(cityListRetrieved = true) }
+                    _uiState.update { it.copy(cityListRetrieved = true, city = "") }
                 }
 
                 is Either.Failure -> {

@@ -1,4 +1,4 @@
-package com.luizalabs.registration.presentation.detail.components
+package com.luizalabs.registration.presentation.components
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
