@@ -5,14 +5,14 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 fun CityResponse.toModel() = City(
-    name = this.nome
+    name = this.name
 )
 
 @JsonClass(generateAdapter = true)
 data class CityResponse(
     val id: Int?,
     @field:Json(name = "microrregiao") val microRegion: Microrregiao?,
-    val nome: String,
+    @Json(name = "nome") val name: String,
     @field:Json(name = "regiao-imediata") val regiao_imediata: RegiaoImediata?,
 )
 
