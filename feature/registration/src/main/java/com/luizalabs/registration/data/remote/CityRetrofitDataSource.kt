@@ -1,6 +1,5 @@
 package com.luizalabs.registration.data.remote
 
-import android.util.MalformedJsonException
 import com.luizalabs.registration.data.remote.response.toModel
 import com.luizalabs.registration.data.remote.service.CitiesApi
 import com.luizalabs.registration.domain.Either
@@ -8,6 +7,7 @@ import com.luizalabs.registration.domain.error.Error
 import com.luizalabs.registration.domain.error.NetworkError
 import com.luizalabs.registration.domain.model.City
 import com.luizalabs.registration.domain.repository.CityRemoteDataSource
+import com.squareup.moshi.JsonDataException
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
@@ -31,7 +31,7 @@ class CityRetrofitDataSource @Inject constructor(
             }
         } catch (e: IOException) {
             Either.Failure(NetworkError.CONNECTION_ERROR)
-        } catch (e: MalformedJsonException) {
+        } catch (e: JsonDataException) {
             Either.Failure(NetworkError.PARSE_ERROR)
         } catch (e: Exception) {
             Either.Failure(NetworkError.UNKNOWN_ERROR)

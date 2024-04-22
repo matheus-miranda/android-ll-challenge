@@ -1,5 +1,7 @@
 package com.luizalabs.network
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,14 +17,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
 
-    private const val TIMEOUT_SECONDS = 10L
+    private const val TIMEOUT_SECONDS = 30L
     private const val BASE_URL = "https://servicodados.ibge.gov.br/api/v1/"
 
     @Provides
     fun provideLoggingInterceptor(@BuildType buildType: String): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             setLevel(
-                if (buildType == "DEBUG") {
+                if (buildType == "debug") {
                     HttpLoggingInterceptor.Level.BODY
                 } else HttpLoggingInterceptor.Level.NONE
             )
@@ -41,8 +43,15 @@ internal object NetworkModule {
     }
 
     @Provides
-    fun provideMoshiConvertFactory(): MoshiConverterFactory {
-        return MoshiConverterFactory.create()
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
+
+    @Provides
+    fun provideMoshiConvertFactory(moshi: Moshi): MoshiConverterFactory {
+        return MoshiConverterFactory.create(moshi)
     }
 
     @Provides
