@@ -25,4 +25,15 @@
     <string name="error_try_again_later">Erro, tente mais tarde</string>
     <string name="fill_all_fields">Por favor preencha todos os campos</string>
     <string name="save_failed">Falha ao salvar, tente novamente</string>
+    <string name="name">Nome</string>
+    <string name="id">CPF</string>
+    <string name="number_of_parcels">Qtde de Pacotes</string>
+    <string name="street_name">Rua</string>
+    <string name="house_number">Número</string>
+    <string name="district">Bairro</string>
+    <string name="zipcode">CEP</string>
+    <string name="complement">Complemento</string>
+    <string name="city">Cidade</string>
+    <string name="state">Estado</string>
+    <string name="cancel">Cancelar</string>
 </resources>

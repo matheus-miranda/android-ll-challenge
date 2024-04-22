@@ -25,4 +25,15 @@
     <string name="error_try_again_later">Error. Try again later</string>
     <string name="fill_all_fields">Please fill out all the fields</string>
     <string name="save_failed">Save failed, try again</string>
+    <string name="name">Name</string>
+    <string name="id">ID</string>
+    <string name="number_of_parcels">Number of Parcels</string>
+    <string name="street_name">Street</string>
+    <string name="house_number">Number</string>
+    <string name="district">District</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="complement">Complement</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="cancel">Cancel</string>
 </resources>

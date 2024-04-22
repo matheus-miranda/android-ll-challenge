@@ -151,13 +151,13 @@ private fun MainContent(
                 value = uiState.clientName,
                 onValueChange = { onEvent.invoke(DetailUiEvent.ClientNameEdit(it)) },
                 leadingIcon = Icons.Filled.Person,
-                label = "Name"
+                label = stringResource(R.string.name)
             )
             AppTextField(
                 value = uiState.clientCpf,
                 onValueChange = { onEvent.invoke(DetailUiEvent.ClientCpfEdit(it)) },
                 leadingIcon = Icons.Filled.Person,
-                label = "ID"
+                label = stringResource(R.string.id)
             )
             AppTextField(
                 value = if (uiState.parcelQuantity == 0) "" else uiState.parcelQuantity.toString(),
@@ -169,7 +169,7 @@ private fun MainContent(
                         onEvent.invoke(DetailUiEvent.ParcelQuantityEdit(0))
                     }
                 },
-                label = "Number of Parcels",
+                label = stringResource(R.string.number_of_parcels),
                 leadingIcon = Icons.Filled.Numbers,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
@@ -204,31 +204,31 @@ private fun MainContent(
                 value = uiState.street,
                 onValueChange = { onEvent.invoke(DetailUiEvent.StreetEdit(it)) },
                 leadingIcon = Icons.Filled.House,
-                label = "Street"
+                label = stringResource(R.string.street_name)
             )
             AppTextField(
                 value = uiState.number,
                 onValueChange = { onEvent.invoke(DetailUiEvent.NumberEdit(it)) },
                 leadingIcon = Icons.Filled.House,
-                label = "Number"
+                label = stringResource(R.string.house_number)
             )
             AppTextField(
                 value = uiState.neighborhood,
                 onValueChange = { onEvent.invoke(DetailUiEvent.NeighborhoodEdit(it)) },
                 leadingIcon = Icons.Filled.House,
-                label = "District"
+                label = stringResource(R.string.district)
             )
             AppTextField(
                 value = uiState.zipCode,
                 onValueChange = { onEvent.invoke(DetailUiEvent.ZipcodeEdit(it)) },
                 leadingIcon = Icons.Filled.House,
-                label = "Zipcode"
+                label = stringResource(R.string.zipcode)
             )
             AppTextField(
                 value = uiState.complement.orEmpty(),
                 onValueChange = { onEvent.invoke(DetailUiEvent.ComplementEdit(it)) },
                 leadingIcon = Icons.Filled.Warehouse,
-                label = "Complement"
+                label = stringResource(R.string.complement)
             )
 
             var expandedMenuState by remember { mutableStateOf(false) }
@@ -239,7 +239,7 @@ private fun MainContent(
             ) {
                 TextField(
                     value = uiState.state,
-                    label = { Text("State") },
+                    label = { Text(stringResource(R.string.state)) },
                     onValueChange = {},
                     readOnly = true,
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuState) },
@@ -277,7 +277,7 @@ private fun MainContent(
                 TextField(
                     enabled = uiState.cityListRetrieved,
                     value = uiState.city,
-                    label = { Text("City") },
+                    label = { Text(stringResource(R.string.city)) },
                     onValueChange = {},
                     readOnly = true,
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedMenuCity) },
