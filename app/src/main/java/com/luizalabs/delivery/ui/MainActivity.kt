@@ -1,10 +1,10 @@
-package com.luizalabs.delivery
+package com.luizalabs.delivery.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.luizalabs.delivery.navigation.RootNavHost
-import com.luizalabs.delivery.ui.theme.DeliveryAppTheme
+import com.luizalabs.designsystem.theme.DeliveryAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

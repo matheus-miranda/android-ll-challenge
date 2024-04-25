@@ -1,4 +1,4 @@
-package com.luizalabs.delivery.ui.theme
+package com.luizalabs.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
