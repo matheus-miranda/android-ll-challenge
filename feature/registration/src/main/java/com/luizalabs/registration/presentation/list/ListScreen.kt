@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.luizalabs.designsystem.AppTopBar
 import com.luizalabs.designsystem.LoadingIndicator
 import com.luizalabs.registration.R
@@ -19,6 +18,7 @@ import com.luizalabs.registration.domain.model.DeliveryForm
 import com.luizalabs.registration.presentation.list.components.CenterScreenText
 import com.luizalabs.registration.presentation.list.components.DeliveryList
 import com.luizalabs.registration.presentation.list.components.FabButton
+import com.luizalabs.ui.DevicePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +59,7 @@ private fun MainContent(
     }
 }
 
-@Preview
+@DevicePreviews
 @Composable
 private fun ListScreenPreview() {
     val previewData = DeliveryForm(

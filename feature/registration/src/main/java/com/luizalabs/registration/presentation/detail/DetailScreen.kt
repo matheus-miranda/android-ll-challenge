@@ -50,6 +50,7 @@ import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.City
 import com.luizalabs.registration.presentation.common.toDateString
 import com.luizalabs.registration.presentation.detail.helper.stateList
+import com.luizalabs.ui.DevicePreviews
 import com.luizalabs.ui.debouncedClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -256,7 +257,7 @@ private fun MainContent(
     }
 }
 
-@Preview
+@DevicePreviews
 @Composable
 private fun DetailScreenPreview() {
     DetailScreen(onNavigateUp = {}, uiState = DetailUiState(), cityList = listOf(), onEvent = {})
