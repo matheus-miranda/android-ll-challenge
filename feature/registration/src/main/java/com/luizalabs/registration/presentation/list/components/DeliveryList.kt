@@ -23,6 +23,7 @@ import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.DeliveryForm
 import com.luizalabs.registration.presentation.common.toDateString
 import com.luizalabs.registration.presentation.list.ListUiState
+import com.luizalabs.ui.debouncedClick
 
 @Composable
 fun DeliveryList(
@@ -46,7 +47,7 @@ fun DeliveryList(
 @Composable
 private fun ListItem(form: DeliveryForm, onViewCardDetailsClick: (Int) -> Unit) {
     Card(
-        onClick = { onViewCardDetailsClick.invoke(form.id) },
+        onClick = debouncedClick { onViewCardDetailsClick.invoke(form.id) },
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.fillMaxWidth()

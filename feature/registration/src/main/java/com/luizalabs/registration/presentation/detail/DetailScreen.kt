@@ -50,6 +50,7 @@ import com.luizalabs.registration.R
 import com.luizalabs.registration.domain.model.City
 import com.luizalabs.registration.presentation.common.toDateString
 import com.luizalabs.registration.presentation.detail.helper.stateList
+import com.luizalabs.ui.debouncedClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -245,7 +246,7 @@ private fun MainContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp, bottom = 8.dp),
-            onClick = { onEvent.invoke(DetailUiEvent.SubmitForm) }
+            onClick = debouncedClick { onEvent.invoke(DetailUiEvent.SubmitForm) }
         ) {
             Text(text = stringResource(R.string.save))
         }
