@@ -33,7 +33,6 @@ fun AppDatePickerDialog(
                 onDateSelected(adjustedDate)
                 onDismiss()
             }
-
             ) {
                 Text(text = "OK")
             }
