@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.hilt)
-    kotlin("kapt")
 }
 
 android {
-    namespace = "com.luizalabs.database"
+    namespace = "com.luizalabs.testing"
     compileSdk = 34
 
     defaultConfig {
@@ -35,15 +33,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
+    // Unit tests
+    testImplementation(libs.junit)
+    testImplementation(libs.room.testing)
 
-    implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
-    kapt(libs.room.compiler)
-    implementation(libs.room.ktx)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    api(project(":core:testing"))
+    // Instrumented tests
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

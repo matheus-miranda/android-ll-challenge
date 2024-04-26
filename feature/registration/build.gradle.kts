@@ -62,6 +62,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:ui"))
+    api(project(":core:testing"))
 }
 
 kapt {
