@@ -33,11 +33,14 @@ android {
 }
 
 dependencies {
-    // Unit tests
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.test.rules)
+
     testImplementation(libs.junit)
     testImplementation(libs.room.testing)
+    api(libs.coroutines.test)
+    api(libs.mockk)
 
-    // Instrumented tests
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
