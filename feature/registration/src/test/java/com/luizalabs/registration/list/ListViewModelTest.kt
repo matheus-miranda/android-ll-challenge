@@ -5,6 +5,7 @@ import com.luizalabs.registration.list.ListViewModelTestHelper.form
 import com.luizalabs.registration.presentation.list.ListUiState
 import com.luizalabs.registration.presentation.list.ListViewModel
 import com.luizalabs.testing.MainDispatcherRule
+import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import org.junit.AfterClass
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -76,5 +78,13 @@ class ListViewModelTest {
             }
         }
         return collectJob
+    }
+
+    companion object {
+        @JvmStatic
+        @AfterClass
+        fun tearDown() {
+            clearAllMocks()
+        }
     }
 }

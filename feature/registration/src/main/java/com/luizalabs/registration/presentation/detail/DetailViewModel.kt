@@ -11,7 +11,6 @@ import com.luizalabs.registration.domain.model.DeliveryForm
 import com.luizalabs.registration.domain.repository.CityRepository
 import com.luizalabs.registration.domain.repository.DeliveryRepository
 import com.luizalabs.registration.presentation.detail.helper.DetailScreenError
-import com.luizalabs.registration.presentation.detail.helper.UiText
 import com.luizalabs.registration.presentation.detail.helper.asUiText
 import com.luizalabs.registration.presentation.detail.navigation.DetailScreenArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -70,19 +69,21 @@ internal class DetailViewModel @Inject constructor(
             is DetailUiEvent.ClientNameEdit -> _uiState.update { it.copy(clientName = uiEvent.name) }
             is DetailUiEvent.ClientCpfEdit -> _uiState.update { it.copy(clientCpf = uiEvent.cpf) }
             is DetailUiEvent.ZipcodeEdit -> _uiState.update { it.copy(zipCode = uiEvent.zipcode) }
-            is DetailUiEvent.StateEdit -> {
-                _uiState.update { it.copy(state = uiEvent.state) }
-                onStateSelected(_uiState.value.state)
-            }
+            is DetailUiEvent.StateEdit -> stateEdit(uiEvent)
             is DetailUiEvent.CityEdit -> _uiState.update { it.copy(city = uiEvent.city) }
             is DetailUiEvent.NeighborhoodEdit -> _uiState.update { it.copy(neighborhood = uiEvent.neighborhood) }
             is DetailUiEvent.StreetEdit -> _uiState.update { it.copy(street = uiEvent.street) }
             is DetailUiEvent.NumberEdit -> _uiState.update { it.copy(number = uiEvent.number) }
             is DetailUiEvent.ComplementEdit -> _uiState.update { it.copy(complement = uiEvent.complement) }
-            DetailUiEvent.SnackBarShown -> _uiState.update { it.copy(uiError = null) }
-            DetailUiEvent.SubmitForm -> validateForm()
-            DetailUiEvent.DeleteForm -> deleteForm()
+            is DetailUiEvent.SnackBarShown -> _uiState.update { it.copy(uiError = null) }
+            is DetailUiEvent.SubmitForm -> validateForm()
+            is DetailUiEvent.DeleteForm -> deleteForm()
         }
+    }
+
+    private fun stateEdit(uiEvent: DetailUiEvent.StateEdit) {
+        _uiState.update { it.copy(state = uiEvent.state) }
+        onStateSelected(_uiState.value.state)
     }
 
     private fun onStateSelected(state: String) {
@@ -160,23 +161,3 @@ internal class DetailViewModel @Inject constructor(
         }
     }
 }
-
-data class DetailUiState(
-    val isLoading: Boolean = false,
-    val uiError: UiText? = null,
-    val isNewForm: Boolean = true,
-    val formSaved: Boolean = false,
-    val cityListRetrieved: Boolean = false,
-    val id: Int = 0,
-    val parcelQuantity: Int = 0,
-    val deliveryDeadline: Long = System.currentTimeMillis(),
-    val clientName: String = "",
-    val clientCpf: String = "",
-    val zipCode: String = "",
-    val state: String = "",
-    val city: String = "",
-    val neighborhood: String = "",
-    val street: String = "",
-    val number: String = "",
-    val complement: String? = null,
-)

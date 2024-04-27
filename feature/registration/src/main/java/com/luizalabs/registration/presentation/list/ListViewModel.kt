@@ -2,7 +2,6 @@ package com.luizalabs.registration.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.luizalabs.registration.domain.model.DeliveryForm
 import com.luizalabs.registration.domain.repository.DeliveryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -34,11 +33,4 @@ class ListViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = ListUiState.Loading
     )
-}
-
-sealed interface ListUiState {
-    data object Loading : ListUiState
-    data object Empty : ListUiState
-    data object Error : ListUiState
-    data class Success(val list: List<DeliveryForm>) : ListUiState
 }
