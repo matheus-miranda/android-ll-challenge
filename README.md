@@ -39,9 +39,13 @@ Contains some useful UI utilities.
 ### :core:testing
 Useful testing libraries and helper classes.
 
+### Screenshots
+| | | | | | 
+| - | - | - | - | - |
+| ![Screenshot_1713805325](https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/fa721b8e-b66f-4d11-8731-3ad71d635d4a) | ![Screenshot_1713805403](https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/85b84ed3-4183-4888-acd1-d93773e3cf52) | ![Screenshot_1713805348](https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/87c8f754-e3a8-419f-a2e4-806951149ba3) | ![Screenshot_1713805421](https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/00b6152a-533a-469d-bc75-4e46ffff01da) | ![Screenshot_1713805431](https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/1b378ad1-4f44-4bb5-9dd8-7db060fd7223) |
+
 ### Installation instructions
 Just run the app module
-
 
 ## Português
 Aplicativo modularizado, baseado em arquitetura clean. Permite realizar um cadastro de entrega e salvar em banco de dados local.
