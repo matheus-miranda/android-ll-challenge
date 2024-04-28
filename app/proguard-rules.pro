@@ -62,3 +62,6 @@
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
+
+# JUnit
+-keep class org.apiguardian.api.** { *; }
