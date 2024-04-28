@@ -26,7 +26,9 @@ internal object NetworkModule {
             setLevel(
                 if (buildType == "debug") {
                     HttpLoggingInterceptor.Level.BODY
-                } else HttpLoggingInterceptor.Level.NONE
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
             )
         }
     }

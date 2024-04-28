@@ -54,7 +54,6 @@ import com.luizalabs.ui.debouncedClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DetailScreen(
@@ -77,9 +76,11 @@ internal fun DetailScreen(
             AppTopBar(
                 title = if (uiState.isNewForm) {
                     stringResource(R.string.new_delivery)
-                } else stringResource(
-                    R.string.edit_delivery
-                ),
+                } else {
+                    stringResource(
+                        R.string.edit_delivery
+                    )
+                },
                 shouldNavigateUp = true,
                 onNavigateUp = { onNavigateUp.invoke() },
                 shouldShowDelete = uiState.isNewForm.not(),
@@ -190,9 +191,11 @@ private fun MainContent(
                     AppDatePickerDialog(
                         onDateSelected = {
                             onEvent.invoke(DetailUiEvent.DeliveryDeadlineEdit(it))
-                        }, onDismiss = {
+                        },
+                        onDismiss = {
                             showDatePicker = false
-                        })
+                        }
+                    )
                 }
             }
 
@@ -231,14 +234,16 @@ private fun MainContent(
                 value = uiState.state,
                 label = stringResource(R.string.state),
                 itemList = stateList,
-                onSelectedItem = { onEvent.invoke(DetailUiEvent.StateEdit(it)) })
+                onSelectedItem = { onEvent.invoke(DetailUiEvent.StateEdit(it)) }
+            )
 
             AppDropdownMenu(
                 value = uiState.city,
                 enabled = uiState.cityListRetrieved,
                 itemList = cityList.map { it.name },
                 label = stringResource(R.string.city),
-                onSelectedItem = { onEvent.invoke(DetailUiEvent.CityEdit(it)) })
+                onSelectedItem = { onEvent.invoke(DetailUiEvent.CityEdit(it)) }
+            )
         }
 
         Spacer(modifier = Modifier.weight(1f))

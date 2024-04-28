@@ -31,10 +31,12 @@ internal fun NavGraphBuilder.detailScreen(
 ) {
     composable(
         DETAIL_ROUTE,
-        arguments = listOf(navArgument(FORM_ID) {
-            type = NavType.IntType
-            defaultValue = -1
-        })
+        arguments = listOf(
+            navArgument(FORM_ID) {
+                type = NavType.IntType
+                defaultValue = -1
+            }
+        )
     ) {
         val viewModel: DetailViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()

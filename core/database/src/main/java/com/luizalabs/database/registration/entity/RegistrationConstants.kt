@@ -1,6 +1,6 @@
 package com.luizalabs.database.registration.entity
 
-internal object RegistrationConstants  {
+internal object RegistrationConstants {
     const val DELIVERY_FORM_TABLE_NAME = "delivery_form"
     const val DELIVERY_FORM_COLUMN_ID = "id"
     const val DELIVERY_FORM_COLUMN_PARCEL_QUANTITY = "parcel_quantity"

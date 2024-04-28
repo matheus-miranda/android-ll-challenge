@@ -17,11 +17,13 @@ fun AppDatePickerDialog(
     onDateSelected: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val datePickerState = rememberDatePickerState(selectableDates = object : SelectableDates {
-        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-            return utcTimeMillis >= System.currentTimeMillis()
+    val datePickerState = rememberDatePickerState(
+        selectableDates = object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                return utcTimeMillis >= System.currentTimeMillis()
+            }
         }
-    })
+    )
 
     val selectedDate = datePickerState.selectedDateMillis ?: System.currentTimeMillis()
     val adjustedDate = selectedDate + TimeUnit.DAYS.toMillis(1)
@@ -29,10 +31,11 @@ fun AppDatePickerDialog(
     DatePickerDialog(
         onDismissRequest = { onDismiss() },
         confirmButton = {
-            Button(onClick = {
-                onDateSelected(adjustedDate)
-                onDismiss()
-            }
+            Button(
+                onClick = {
+                    onDateSelected(adjustedDate)
+                    onDismiss()
+                }
             ) {
                 Text(text = "OK")
             }

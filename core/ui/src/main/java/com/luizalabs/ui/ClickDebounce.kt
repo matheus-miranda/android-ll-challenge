@@ -1,3 +1,5 @@
+@file:Suppress("MatchingDeclarationName")
+
 package com.luizalabs.ui
 
 import androidx.compose.runtime.Composable

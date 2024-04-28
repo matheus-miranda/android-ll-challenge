@@ -100,28 +100,41 @@ internal class DetailViewModel @Inject constructor(
 
                 is Either.Failure -> {
                     when (cityResponse.cause) {
-                        NetworkError.NO_INTERNET -> _uiState.update { it.copy(uiError = NetworkError.NO_INTERNET.asUiText()) }
-                        NetworkError.CONNECTION_ERROR -> _uiState.update { it.copy(uiError = NetworkError.CONNECTION_ERROR.asUiText()) }
-                        NetworkError.REQUEST_TIMEOUT -> _uiState.update { it.copy(uiError = NetworkError.REQUEST_TIMEOUT.asUiText()) }
-                        NetworkError.PAYLOAD_TOO_LARGE -> _uiState.update { it.copy(uiError = NetworkError.PAYLOAD_TOO_LARGE.asUiText()) }
-                        NetworkError.PARSE_ERROR -> _uiState.update { it.copy(uiError = NetworkError.PARSE_ERROR.asUiText()) }
-                        NetworkError.UNKNOWN_ERROR -> _uiState.update { it.copy(uiError = NetworkError.UNKNOWN_ERROR.asUiText()) }
+                        NetworkError.NO_INTERNET -> _uiState.update {
+                            it.copy(uiError = NetworkError.NO_INTERNET.asUiText())
+                        }
+                        NetworkError.CONNECTION_ERROR -> _uiState.update {
+                            it.copy(uiError = NetworkError.CONNECTION_ERROR.asUiText())
+                        }
+                        NetworkError.REQUEST_TIMEOUT -> _uiState.update {
+                            it.copy(uiError = NetworkError.REQUEST_TIMEOUT.asUiText())
+                        }
+                        NetworkError.PAYLOAD_TOO_LARGE -> _uiState.update {
+                            it.copy(uiError = NetworkError.PAYLOAD_TOO_LARGE.asUiText())
+                        }
+                        NetworkError.PARSE_ERROR -> _uiState.update {
+                            it.copy(uiError = NetworkError.PARSE_ERROR.asUiText())
+                        }
+                        NetworkError.UNKNOWN_ERROR -> _uiState.update {
+                            it.copy(uiError = NetworkError.UNKNOWN_ERROR.asUiText())
+                        }
                     }
                 }
             }
         }
     }
 
+    @Suppress("ComplexCondition")
     private fun validateForm() {
-        if (_uiState.value.clientName.isBlank()
-            || _uiState.value.clientCpf.isBlank()
-            || _uiState.value.city.isBlank()
-            || _uiState.value.state.isBlank()
-            || _uiState.value.street.isBlank()
-            || _uiState.value.number.isBlank()
-            || _uiState.value.neighborhood.isBlank()
-            || _uiState.value.zipCode.isBlank()
-            || _uiState.value.parcelQuantity == 0
+        if (_uiState.value.clientName.isBlank() ||
+            _uiState.value.clientCpf.isBlank() ||
+            _uiState.value.city.isBlank() ||
+            _uiState.value.state.isBlank() ||
+            _uiState.value.street.isBlank() ||
+            _uiState.value.number.isBlank() ||
+            _uiState.value.neighborhood.isBlank() ||
+            _uiState.value.zipCode.isBlank() ||
+            _uiState.value.parcelQuantity == 0
         ) {
             _uiState.update { it.copy(uiError = DetailScreenError.EMPTY_FIELDS.asUiText()) }
         } else {
