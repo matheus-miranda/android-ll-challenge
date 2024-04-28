@@ -19,6 +19,7 @@ room = "2.6.1"
 mockk = "1.13.10"
 kotlinxCoroutinesTest = "1.8.0"
 androidxTestRules = "1.5.0"
+detekt = "1.23.6"
 compose-compiler = "1.5.1"
 
 [libraries]
@@ -73,6 +74,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
 
 [bundles]
 compose = ["androidx-activity-compose", "androidx-navigation-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3", "androidx-material-icons"]
