@@ -1,10 +1,10 @@
 ## Delivery App
 Modularized app, based on Clean Architecture. It allows you to create, read, update and delete a delivery form on a local database.
-The city field is fetched from a remote API (Brazilian cities) after choosing the State.
+The city field is fetched from a remote API (Brazilian cities) after choosing the State. Includes unit and instrumented testing.
 
 Built with:
+- MVI based architecture
 - Jetpack Compose
-- Android Architecture Components
 - Hilt
 - Room
 - ViewModel
@@ -12,6 +12,7 @@ Built with:
 - Compose Navigation
 - Retrofit / OkHttp / Moshi
 - Material3
+- Mockk
 - Resource localization
 
 <img width="720" alt="Screenshot" src="https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/261a06d4-6a7e-4d2e-910c-b07cdbe82053">
@@ -50,8 +51,10 @@ Just run the app module
 ## Português
 Aplicativo modularizado, baseado em arquitetura clean. Permite realizar um cadastro de entrega e salvar em banco de dados local.
 A lista de cidades é populado a partir de uma consulta na API do IBGE (https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMunicipiosGet), após preencher o campo Estado.
+Inclui testes unitários e instrumentados.
 
 Construído com:
+- Arquitetura baseada em MVI
 - Jetpack Compose
 - Android Architecture Components
 - Hilt
@@ -61,6 +64,7 @@ Construído com:
 - Compose Navigation
 - Retrofit / OkHttp / Moshi
 - Material3
+- Mockk
 - Localização
 
 ### :app

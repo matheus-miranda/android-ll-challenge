@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(
+internal class ListViewModel @Inject constructor(
     private val repository: DeliveryRepository,
 ) : ViewModel() {
 

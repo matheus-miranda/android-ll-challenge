@@ -36,6 +36,29 @@ internal class DetailViewModel @Inject constructor(
     private val args = DetailScreenArgs(savedStateHandle)
 
     init {
+        updateFormValuesIfEditingEntry()
+    }
+
+    fun onEvent(uiEvent: DetailUiEvent) {
+        when (uiEvent) {
+            is DetailUiEvent.ParcelQuantityEdit -> _uiState.update { it.copy(parcelQuantity = uiEvent.quantity) }
+            is DetailUiEvent.DeliveryDeadlineEdit -> _uiState.update { it.copy(deliveryDeadline = uiEvent.deadline) }
+            is DetailUiEvent.ClientNameEdit -> _uiState.update { it.copy(clientName = uiEvent.name) }
+            is DetailUiEvent.ClientCpfEdit -> _uiState.update { it.copy(clientCpf = uiEvent.cpf) }
+            is DetailUiEvent.ZipcodeEdit -> _uiState.update { it.copy(zipCode = uiEvent.zipcode) }
+            is DetailUiEvent.StateEdit -> stateEdit(uiEvent)
+            is DetailUiEvent.CityEdit -> _uiState.update { it.copy(city = uiEvent.city) }
+            is DetailUiEvent.NeighborhoodEdit -> _uiState.update { it.copy(neighborhood = uiEvent.neighborhood) }
+            is DetailUiEvent.StreetEdit -> _uiState.update { it.copy(street = uiEvent.street) }
+            is DetailUiEvent.NumberEdit -> _uiState.update { it.copy(number = uiEvent.number) }
+            is DetailUiEvent.ComplementEdit -> _uiState.update { it.copy(complement = uiEvent.complement) }
+            is DetailUiEvent.SnackBarShown -> _uiState.update { it.copy(uiError = null) }
+            is DetailUiEvent.SubmitForm -> validateForm()
+            is DetailUiEvent.DeleteForm -> deleteForm()
+        }
+    }
+
+    private fun updateFormValuesIfEditingEntry() {
         if (args.formId >= 0) {
             _uiState.update { it.copy(isLoading = true) }
             viewModelScope.launch {
@@ -59,25 +82,6 @@ internal class DetailViewModel @Inject constructor(
                     )
                 }
             }
-        }
-    }
-
-    fun onEvent(uiEvent: DetailUiEvent) {
-        when (uiEvent) {
-            is DetailUiEvent.ParcelQuantityEdit -> _uiState.update { it.copy(parcelQuantity = uiEvent.quantity) }
-            is DetailUiEvent.DeliveryDeadlineEdit -> _uiState.update { it.copy(deliveryDeadline = uiEvent.deadline) }
-            is DetailUiEvent.ClientNameEdit -> _uiState.update { it.copy(clientName = uiEvent.name) }
-            is DetailUiEvent.ClientCpfEdit -> _uiState.update { it.copy(clientCpf = uiEvent.cpf) }
-            is DetailUiEvent.ZipcodeEdit -> _uiState.update { it.copy(zipCode = uiEvent.zipcode) }
-            is DetailUiEvent.StateEdit -> stateEdit(uiEvent)
-            is DetailUiEvent.CityEdit -> _uiState.update { it.copy(city = uiEvent.city) }
-            is DetailUiEvent.NeighborhoodEdit -> _uiState.update { it.copy(neighborhood = uiEvent.neighborhood) }
-            is DetailUiEvent.StreetEdit -> _uiState.update { it.copy(street = uiEvent.street) }
-            is DetailUiEvent.NumberEdit -> _uiState.update { it.copy(number = uiEvent.number) }
-            is DetailUiEvent.ComplementEdit -> _uiState.update { it.copy(complement = uiEvent.complement) }
-            is DetailUiEvent.SnackBarShown -> _uiState.update { it.copy(uiError = null) }
-            is DetailUiEvent.SubmitForm -> validateForm()
-            is DetailUiEvent.DeleteForm -> deleteForm()
         }
     }
 
@@ -105,12 +109,6 @@ internal class DetailViewModel @Inject constructor(
                     }
                 }
             }
-        }
-    }
-
-    private fun deleteForm() {
-        viewModelScope.launch {
-            formRepository.deleteFormById(_uiState.value.id)
         }
     }
 
@@ -158,6 +156,12 @@ internal class DetailViewModel @Inject constructor(
             }.onSuccess {
                 _uiState.update { it.copy(formSaved = true, isLoading = false) }
             }
+        }
+    }
+
+    private fun deleteForm() {
+        viewModelScope.launch {
+            formRepository.deleteFormById(_uiState.value.id)
         }
     }
 }
