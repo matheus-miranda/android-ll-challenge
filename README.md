@@ -1,6 +1,6 @@
 ## Delivery App
 Modularized app, based on MVI and Clean Architecture. It allows you to create, read, update and delete a delivery form on a local database.
-The city field is fetched from a remote API (Brazilian cities) after choosing the State. Static code analysis with detekt, Github Action CI and complete unit and instrumented testing.
+The city field is fetched from a remote API (Brazilian cities) after choosing the State. Static code analysis with detekt, Github Actions CI and complete unit and instrumented testing.
 
 Built with:
 - Jetpack Compose
@@ -51,7 +51,7 @@ Just run the app module
 ## Português
 Aplicativo modularizado, baseado em MVI e arquitetura limpa. Permite realizar um cadastro de entrega e salvar em banco de dados local.
 A lista de cidades é populado a partir de uma consulta na API do IBGE (https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMunicipiosGet), após preencher o campo Estado.
-Análise estática de código com o detekt, CI com Github Action e testes unitários e instrumentados.
+Análise estática de código com o detekt, CI com Github Actions e testes unitários e instrumentados.
 
 Construído com:
 - Jetpack Compose
