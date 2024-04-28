@@ -14,7 +14,7 @@ fun NetworkError.asUiText(): UiText {
     }
 }
 
-fun DetailScreenError.asUiText() : UiText {
+fun DetailScreenError.asUiText(): UiText {
     return when (this) {
         DetailScreenError.EMPTY_FIELDS -> UiText.StringResource(R.string.fill_all_fields)
         DetailScreenError.SUBMIT_ERROR -> UiText.StringResource(R.string.save_failed)

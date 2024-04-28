@@ -1,9 +1,8 @@
 ## Delivery App
-Modularized app, based on Clean Architecture. It allows you to create, read, update and delete a delivery form on a local database.
-The city field is fetched from a remote API (Brazilian cities) after choosing the State. Includes unit and instrumented testing.
+Modularized app, based on MVI and Clean Architecture. It allows you to create, read, update and delete a delivery form on a local database.
+The city field is fetched from a remote API (Brazilian cities) after choosing the State. Static code analysis with detekt, Github Action CI and complete unit and instrumented testing.
 
 Built with:
-- MVI based architecture
 - Jetpack Compose
 - Hilt
 - Room
@@ -14,6 +13,7 @@ Built with:
 - Material3
 - Mockk
 - Resource localization
+- Detekt
 
 <img width="720" alt="Screenshot" src="https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/261a06d4-6a7e-4d2e-910c-b07cdbe82053">
 
@@ -49,12 +49,11 @@ Useful testing libraries and helper classes.
 Just run the app module
 
 ## Português
-Aplicativo modularizado, baseado em arquitetura clean. Permite realizar um cadastro de entrega e salvar em banco de dados local.
+Aplicativo modularizado, baseado em MVI e arquitetura limpa. Permite realizar um cadastro de entrega e salvar em banco de dados local.
 A lista de cidades é populado a partir de uma consulta na API do IBGE (https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMunicipiosGet), após preencher o campo Estado.
-Inclui testes unitários e instrumentados.
+Análise estática de código com o detekt, CI com Github Action e testes unitários e instrumentados.
 
 Construído com:
-- Arquitetura baseada em MVI
 - Jetpack Compose
 - Android Architecture Components
 - Hilt
@@ -66,6 +65,7 @@ Construído com:
 - Material3
 - Mockk
 - Localização
+- Detekt
 
 ### :app
 Contém o NavHost raiz para navegar entre as features.
@@ -73,7 +73,7 @@ Todos os módulos de feature possuem seu próprio gráfico de navegação intern
 
 ### :feature
 Os módulos de feature contêm fluxos logicamente relacionados. Features podem navegar entre si por meio do NavHost do módulo :app.
-As features são estruturadas com lógica de domínio/dados/apresentação para separação de interesses.
+As features são estruturadas com lógica de domínio/dados/apresentação para separação de camadas.
 
 ### :core:database
 Contém inicialização do banco de dados. As features podem implementar suas próprias tabelas e expor DAOs para serem injetados em seus data sources. 
