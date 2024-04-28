@@ -37,7 +37,7 @@ class ListViewModelTest {
 
     @Test
     fun uiState_whenInitialized_thenShowLoading() = runTest {
-        assertEquals(ListUiState.Error, viewModel.uiState.value)
+        assertEquals(ListUiState.Loading, viewModel.uiState.value)
     }
 
     @Test
