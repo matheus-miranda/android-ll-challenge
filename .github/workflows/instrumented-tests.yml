@@ -17,12 +17,11 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: 'zulu'
+          distribution: 'oracle'
           java-version: '17'
 
       - name: Run tests
-        run: ./.github/workflows/scripts/install-tools.sh
-      - uses: ReactiveCircus/android-emulator-runner@v2
+        uses: ReactiveCircus/android-emulator-runner@v2
         with:
           api-level: 30
           target: google_apis
