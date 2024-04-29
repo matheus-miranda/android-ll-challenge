@@ -6,9 +6,9 @@ on:
       - 'master'
 
 jobs:
-  build:
-    name: UI Tests
-    runs-on: ubuntu-latest
+  connected-tests:
+    name: Run UI Tests
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Repository
@@ -17,24 +17,14 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
-          distribution: 'oracle'
+          distribution: 'zulu'
           java-version: '17'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew assembleDebug assembleAndroidTest
-
-      - name: Run Instrumented Tests
-        uses: emulator-wtf/run-tests@v0.9.9
+      - name: Run tests
+        run: ./.github/workflows/scripts/install-tools.sh
+      - uses: ReactiveCircus/android-emulator-runner@v2
         with:
-          api-token: ${{ secrets.EW_API_TOKEN }}
-          app: app/build/outputs/apk/debug/app-debug.apk
-          test: app/build/outputs/apk/androidTest/app-debug-androidTest.apk
-          outputs-dir: build/test-results
-      - name: Publish test report
-        uses: mikepenz/action-junit-report@v2
-        if: always() # always run even if the tests fail
-        with:
-          report_paths: 'build/test-results/**/*.xml'
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          script: ./gradlew connectedCheck
