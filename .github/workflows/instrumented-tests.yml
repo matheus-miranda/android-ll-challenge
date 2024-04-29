@@ -8,7 +8,7 @@ on:
 jobs:
   connected-tests:
     name: Run UI Tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
 
       - name: Run tests
-        uses: ReactiveCircus/android-emulator-runner@v2
+        uses: ReactiveCircus/android-emulator-runner@v2.30.1
         with:
           api-level: 30
           target: google_apis
