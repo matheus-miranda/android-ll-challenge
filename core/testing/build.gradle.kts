@@ -48,7 +48,9 @@ dependencies {
     api(libs.coroutines.test)
     api(libs.mockk)
 
-    androidTestImplementation(libs.androidx.junit)
+    api(libs.androidx.junit)
+    api(libs.arch.testing)
+    androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
