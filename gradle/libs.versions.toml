@@ -20,7 +20,7 @@ mockk = "1.13.10"
 kotlinxCoroutinesTest = "1.8.0"
 androidxTestRules = "1.5.0"
 detekt = "1.23.6"
-hiltAndroidTesting = "2.51"
+hiltAndroidTesting = "2.51.1"
 archCore = "2.2.0"
 compose-compiler = "1.5.1"
 
