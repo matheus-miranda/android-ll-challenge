@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.luizalabs.testing.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -71,6 +71,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    kaptAndroidTest(libs.hilt.compiler)
 
     implementation(project(":feature:registration"))
     implementation(project(":core:network"))

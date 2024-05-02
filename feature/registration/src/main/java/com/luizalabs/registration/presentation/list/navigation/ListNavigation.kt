@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.luizalabs.registration.presentation.list.ListScreen
 import com.luizalabs.registration.presentation.list.ListViewModel
 
-internal const val LIST_ROUTE = "list"
+const val LIST_ROUTE = "list"
 
 internal fun NavGraphBuilder.listScreen(
     onAddNewDeliveryClick: () -> Unit,
