@@ -72,6 +72,7 @@ coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
 arch-testing = { module = "androidx.arch.core:core-testing", version.ref = "archCore"}
+navigation-compose-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigationCompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
@@ -42,16 +44,19 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.test.rules)
+    implementation(libs.hilt.android)
 
-    testImplementation(libs.junit)
+    api(libs.junit)
     testImplementation(libs.room.testing)
     api(libs.coroutines.test)
     api(libs.mockk)
 
     api(libs.androidx.junit)
     api(libs.arch.testing)
-    androidTestImplementation(libs.hilt.android.testing)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    api(libs.navigation.compose.testing)
+    implementation(platform(libs.androidx.compose.bom))
+    api(libs.androidx.ui.test.junit4)
+    api(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
+    api(libs.androidx.espresso.core)
 }
