@@ -14,6 +14,7 @@ Built with:
 - Mockk
 - Resource localization
 - Detekt
+- Dependabot
 
 <img width="720" alt="Screenshot" src="https://github.com/matheus-miranda/android-ll-challenge/assets/15269393/261a06d4-6a7e-4d2e-910c-b07cdbe82053">
 
@@ -23,7 +24,7 @@ All feature modules have their own internal navigation graph implemented with a 
 
 ### :feature
 Feature modules contain logically related user flows. Features can navigate between each other through the :app module NavHost.
-Features are structured with domain/data/presentation logic for separation of concerns.
+Features are structured with domain/data/presentation logic for separation of concerns. Feature modules don't depend on each other.
 
 ### :core:database
 Contains database initialization. Features can implement their own tables and expose DAOs to be injected in feature module data sources.
@@ -66,6 +67,7 @@ Construído com:
 - Mockk
 - Localização
 - Detekt
+- Dependabot
 
 ### :app
 Contém o NavHost raiz para navegar entre as features.
@@ -73,7 +75,7 @@ Todos os módulos de feature possuem seu próprio gráfico de navegação intern
 
 ### :feature
 Os módulos de feature contêm fluxos logicamente relacionados. Features podem navegar entre si por meio do NavHost do módulo :app.
-As features são estruturadas com lógica de domínio/dados/apresentação para separação de camadas.
+As features são estruturadas com lógica de domínio/dados/apresentação para separação de camadas. Módulos de feature não dependem um do outro.
 
 ### :core:database
 Contém inicialização do banco de dados. As features podem implementar suas próprias tabelas e expor DAOs para serem injetados em seus data sources. 
