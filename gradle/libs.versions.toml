@@ -22,7 +22,6 @@ androidxTestRules = "1.5.0"
 detekt = "1.23.6"
 hiltAndroidTesting = "2.51"
 archCore = "2.2.0"
-compose-compiler = "1.5.1"
 
 [libraries]
 # Jetpack
@@ -77,6 +76,7 @@ navigation-compose-testing = { module = "androidx.navigation:navigation-testing"
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
