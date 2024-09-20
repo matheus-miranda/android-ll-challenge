@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -57,6 +57,6 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     api(libs.androidx.ui.test.junit4)
     api(libs.hilt.android.testing)
-    kaptAndroidTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
     api(libs.androidx.espresso.core)
 }

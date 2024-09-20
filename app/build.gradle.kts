@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.detekt)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -68,8 +68,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-    kaptAndroidTest(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 
     implementation(project(":feature:registration"))
     implementation(project(":core:network"))
@@ -79,6 +79,3 @@ dependencies {
     api(project(":core:testing"))
 }
 
-kapt {
-    correctErrorTypes = true
-}
