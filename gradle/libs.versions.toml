@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.1"
 kotlin = "2.0.0"
+ksp = "2.0.0-1.0.24"
 coreKtx = "1.13.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -70,7 +71,7 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
-arch-testing = { module = "androidx.arch.core:core-testing", version.ref = "archCore"}
+arch-testing = { module = "androidx.arch.core:core-testing", version.ref = "archCore" }
 navigation-compose-testing = { module = "androidx.navigation:navigation-testing", version.ref = "navigationCompose" }
 
 [plugins]
@@ -79,7 +80,8 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 compose = ["androidx-activity-compose", "androidx-navigation-compose", "androidx-ui", "androidx-ui-graphics", "androidx-ui-tooling-preview", "androidx-material3", "androidx-material-icons"]
