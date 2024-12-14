@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.luizalabs.network"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26
